@@ -347,7 +347,9 @@ less.Parser = function Parser(env) {
 
                     if (!inString && c === '/') {
                         cc = input.charAt(i + 1);
-                        if (cc === '/' || cc === '*') {
+                        // Disable LESS style '//' comments. Breaks url(//)
+                        // if (cc === '/' || cc === '*') {
+                        if (cc === '*') {
                             if (match = comment.exec(input)) {
                                 if (match.index === i) {
                                     i += match[0].length;
